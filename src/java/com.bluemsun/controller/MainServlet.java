@@ -163,7 +163,28 @@ public class MainServlet extends HttpServlet {
 	//使之成为工作室成员
 	
 	private void addFullMember(HttpServletRequest req, HttpServletResponse resp) {
+		NewMember newMember=new NewMember();
+		newMember.setUsername(req.getParameter("username"));
+		newMember.setEmail(req.getParameter("email"));
+		newMember.setGender(req.getParameter("gender"));
+		newMember.setPhoneNum(req.getParameter("phoneNum"));
 		int flag=0;
+		UserService userService=new UserService();
+		flag = userService.addFullMember(newMember);
+		JSONObject jsonObject=new JSONObject();
+		resp.setContentType("application/json;charset=utf-8");
+		resp.setContentType("text/json;charset=utf-8");
+		if(flag>0){
+			jsonObject.put("flag","true");
+		}
+		else{
+			jsonObject.put("flag","false");
+		}
+		try {
+			resp.getWriter().write(String.valueOf(jsonObject));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 	}
 	
