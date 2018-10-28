@@ -67,6 +67,21 @@ public class UserDaoImpl implements UserDao{
 		return list;
 	}
 	
+	//确认成为工作室成员
+	
+	@Override
+	
+	public int addFullMember(NewMember newMember){
+		int flag=0;
+		String sql="INSERT INTO user (username,password,email,gender,identity,phoneNum) VALUES(?,?,?,?,?,?)";
+		Object[] params={newMember.getUsername(),"123456",newMember.getEmail(),newMember.getGender(),"工作室成员",newMember.getPhoneNum()};
+		try {
+			flag=runner.update(DBUtils.getConnection(),sql,params);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return flag;
+	}
 	@Override
 	//修改
 	

@@ -66,6 +66,9 @@ public class MainServlet extends HttpServlet {
 			case "newMemberQuery":
 				newMemberQuery(req,resp);
 				break;
+			case "addFullMember":
+				addFullMember(req,resp);
+				break;
 		}
 		
 	}
@@ -153,6 +156,15 @@ public class MainServlet extends HttpServlet {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+	}
+	
+	
+	//使之成为工作室成员
+	
+	private void addFullMember(HttpServletRequest req, HttpServletResponse resp) {
+		int flag=0;
+		
 	}
 	
 	//分页

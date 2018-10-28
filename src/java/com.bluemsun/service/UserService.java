@@ -43,6 +43,15 @@ public class UserService {
 		return list;
 	}
 	
+	//使之成为正式成员
+	
+	public int addFullMember(NewMember newMember){
+		int flag=0;
+		UserDao userDao=new UserDaoImpl();
+		flag=userDao.addFullMember(newMember);
+		return flag;
+	}
+	
 	/**
 	 * 普通用户
 	 * @param user

@@ -19,12 +19,16 @@ public interface UserDao{
 	//报名表查看
 	
 	 List<NewMember> queryNewMember();
+	 
+	 int addFullMember(NewMember newMember);
 	
 	// 添加方法_注册
 	
 	int add(User user) throws SQLException;
 	
 	// 更新方法
+	
+	
 	
 	//修改
 	int findIdByUsername(String username);
