@@ -66,7 +66,6 @@ public class MainServlet extends HttpServlet {
 	//新成员申请
 	private void newMemberApplication(HttpServletRequest req, HttpServletResponse resp) {
 		NewMember newMember=new NewMember();
-		newMember.setId(Integer.parseInt(req.getParameter("id")));
 		newMember.setUsername(req.getParameter("username"));
 		newMember.setAge(Integer.parseInt(req.getParameter("age")));
 		newMember.setAim(req.getParameter("aim"));
@@ -78,10 +77,26 @@ public class MainServlet extends HttpServlet {
 		newMember.setOpinion(req.getParameter("opinion"));
 		newMember.setPhoneNum(req.getParameter("phoneNum"));
 		newMember.setPicture(req.getParameter("picture"));
-		newMember.setQq(req.getParameter("qq"));
+		newMember.setMyQQ(req.getParameter("myQQ"));
 		newMember.setSelfInstruction(req.getParameter("selfInstruction"));
 		
+		UserService userService=new UserService();
+		int flag=userService.newMember(newMember);
+		JSONObject jsonObject=new JSONObject();
+		resp.setContentType("application/json;charset=utf-8");
+		resp.setContentType("text/json;charset=utf-8");
 		
+		if (flag>0){
+			jsonObject.put("flag","true");
+		}
+		else{
+			jsonObject.put("flag","false");
+		}
+		try {
+			resp.getWriter().write(String.valueOf(jsonObject));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 	}
 	

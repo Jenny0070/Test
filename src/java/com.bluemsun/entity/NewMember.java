@@ -8,13 +8,33 @@ public class NewMember {
 	private int grade;
 	private int age;
 	private String major;
-	private String qq;
+	private String myQQ;
 	private String email;
 	private String phoneNum;
 	private String picture;
 	private String aim;
 	private String selfInstruction;
 	private String opinion;
+	
+	public NewMember() {
+	
+	}
+	
+	public NewMember(String username, String gender, String nation, int grade, int age, String major, String myQQ, String email, String phoneNum, String picture, String aim, String selfInstruction, String opinion) {
+		this.username = username;
+		this.gender = gender;
+		this.nation = nation;
+		this.grade = grade;
+		this.age = age;
+		this.major = major;
+		this.myQQ = myQQ;
+		this.email = email;
+		this.phoneNum = phoneNum;
+		this.picture = picture;
+		this.aim = aim;
+		this.selfInstruction = selfInstruction;
+		this.opinion = opinion;
+	}
 	
 	public int getId() {
 		return id;
@@ -72,12 +92,12 @@ public class NewMember {
 		this.major = major;
 	}
 	
-	public String getQq() {
-		return qq;
+	public String getMyQQ() {
+		return myQQ;
 	}
 	
-	public void setQq(String qq) {
-		this.qq = qq;
+	public void setMyQQ(String myQQ) {
+		this.myQQ = myQQ;
 	}
 	
 	public String getEmail() {

@@ -1,5 +1,6 @@
 package com.bluemsun.dao.UserDao;
 
+import com.bluemsun.entity.NewMember;
 import com.bluemsun.entity.User;
 import org.junit.Test;
 
@@ -25,7 +26,11 @@ public class UserDaoImplTest {
 	}
 	
 	@Test
-	public void add() {
+	public void newMember() {
+		UserDao userDao=new UserDaoImpl();
+		NewMember newMember=new NewMember("111","qwe","1123",111,111,"1552682","111","111","111","1111","1111","11","111");
+		int flag=userDao.newMember(newMember);
+		System.out.println(flag);
 	}
 	
 	@Test

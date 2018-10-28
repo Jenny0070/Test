@@ -71,14 +71,13 @@ public class UserDaoImpl implements UserDao{
 	@Override
 	public int newMember(NewMember newMember) {
 		int flag=0;
-		String sql="insert into newMemberApplication username=?,gender=?,nation=?,grade=?,age=?,major=?,qq=?,email=?,phoneNum=?,picture=?,aim=?,selfInstruction=?,opinion=?";
-		Object[] params={newMember.getUsername(),newMember.getGender(),newMember.getNation(),newMember.getGrade(),newMember.getAge(),newMember.getMajor(),newMember.getQq(),newMember.getEmail(),newMember.getPhoneNum(),newMember.getPicture(),newMember.getAim(),newMember.getSelfInstruction(),newMember.getOpinion()}
+		String sql="insert into newMemberApplication (username,gender,nation,grade,age,major,myQQ,email,phoneNum,picture,aim,selfInstruction,opinion) values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		Object[] params={newMember.getUsername(),newMember.getGender(),newMember.getNation(),newMember.getGrade(),newMember.getAge(),newMember.getMajor(),newMember.getMyQQ(),newMember.getEmail(),newMember.getPhoneNum(),newMember.getPicture(),newMember.getAim(),newMember.getSelfInstruction(),newMember.getOpinion()};
 		try {
 			flag=runner.update(DBUtils.getConnection(),sql,params);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		DBUtils.closeConnection(null,null,DBUtils.getConnection());
 		return flag;
 	}
 	

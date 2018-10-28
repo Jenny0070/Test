@@ -13,7 +13,10 @@ public class UserService {
 	
 	//报名注册
 	public int newMember(NewMember newMember){
-	
+		UserDao userDao=new UserDaoImpl();
+		int flag=0;
+		flag=userDao.newMember(newMember);
+		return flag;
 	}
 	//注册
 	
