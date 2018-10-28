@@ -60,9 +60,24 @@ public class MainServlet extends HttpServlet {
 			case "newMember":
 				newMemberApplication(req,resp);
 				break;
+			case "newMemberDelete":
+				newMemberDelete(req,resp);
+				break;
+			case "newMemberQuery":
+				newMemberQuery(req,resp);
+				break;
 		}
 		
 	}
+	
+	
+	
+	
+	/**
+	 * 新用户
+	 * @param req
+	 * @param resp
+	 */
 	//新成员申请
 	private void newMemberApplication(HttpServletRequest req, HttpServletResponse resp) {
 		NewMember newMember=new NewMember();
@@ -98,6 +113,46 @@ public class MainServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	//新用户删除
+	
+	private void newMemberDelete(HttpServletRequest req, HttpServletResponse resp) {
+		String username=req.getParameter("username");
+		UserService userService=new UserService();
+		int flag=userService.deleteNewMember(username);
+		JSONObject jsonObject=new JSONObject();
+		resp.setContentType("application/json;charset=utf-8");
+		resp.setContentType("text/json;charset=utf-8");
+		if(flag>0){
+			jsonObject.put("flag","true");
+		}
+		else{
+			jsonObject.put("flag","false");
+		}
+		try {
+			resp.getWriter().write(String.valueOf(jsonObject));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	//新用户查看
+	
+	private void newMemberQuery(HttpServletRequest req, HttpServletResponse resp) {
+		List<NewMember> list=new ArrayList<>();
+		UserService userService=new UserService();
+		list=userService.queryNewMember();
+		JSONArray jsonArray=JSONArray.fromObject(list);
+		resp.setContentType("application/json;charset=utf-8");
+		resp.setContentType("text/json;charset=utf-8");
+		try {
+			resp.getWriter().write(String.valueOf(jsonArray));
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	//分页

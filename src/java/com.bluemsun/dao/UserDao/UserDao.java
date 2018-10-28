@@ -7,27 +7,37 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface UserDao{
+	//新成员申请表
 	
-	public int newMember(NewMember newMember);
+	 int newMember(NewMember newMember);
+	
+	//报名表管理
+	//报名表删除，即审核不通过
+	
+	 int deleteNewMember (String username);
+	
+	//报名表查看
+	
+	 List<NewMember> queryNewMember();
 	
 	// 添加方法_注册
 	
-	public int add(User user) throws SQLException;
+	int add(User user) throws SQLException;
 	
 	// 更新方法
 	
 	//修改
 	int findIdByUsername(String username);
 	
-	public int update(User user) throws SQLException;
+	 int update(User user) throws SQLException;
 	
 	// 删除方法
 	
-	public int delete(int id) throws SQLException;
+	 int delete(int id) throws SQLException;
 	
 	// 查找方法
 	
-	public List findById(User user) throws SQLException;
+	 List findById(User user) throws SQLException;
 	
 	// 查找所有
 	
@@ -37,7 +47,7 @@ public interface UserDao{
 	
 	
 	
-	public long personCount() throws SQLException;
+	 long personCount() throws SQLException;
 	
 	
 }

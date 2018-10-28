@@ -32,6 +32,15 @@ public class UserDaoImplTest {
 		int flag=userDao.newMember(newMember);
 		System.out.println(flag);
 	}
+	@Test
+	public void queryNewMember(){
+		UserDao userDao=new UserDaoImpl();
+		List<NewMember> list=new ArrayList<>();
+		list=userDao.queryNewMember();
+		for (NewMember newMember:list){
+			System.out.println(newMember.getNation());
+		}
+	}
 	
 	@Test
 	public void  delete() {

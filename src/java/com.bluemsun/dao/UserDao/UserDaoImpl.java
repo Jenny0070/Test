@@ -4,6 +4,7 @@ import com.bluemsun.dbutils.DBUtils;
 import com.bluemsun.entity.NewMember;
 import com.bluemsun.entity.User;
 import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.ResultSetHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 
@@ -19,6 +20,51 @@ public class UserDaoImpl implements UserDao{
 	
 	public UserDaoImpl() {
 		runner=new QueryRunner();
+	}
+	
+	/**
+	 * 新成员报名
+	 */
+	
+	@Override
+	public int newMember(NewMember newMember) {
+		int flag=0;
+		String sql="insert into newMemberApplication (username,gender,nation,grade,age,major,myQQ,email,phoneNum,picture,aim,selfInstruction,opinion) values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		Object[] params={newMember.getUsername(),newMember.getGender(),newMember.getNation(),newMember.getGrade(),newMember.getAge(),newMember.getMajor(),newMember.getMyQQ(),newMember.getEmail(),newMember.getPhoneNum(),newMember.getPicture(),newMember.getAim(),newMember.getSelfInstruction(),newMember.getOpinion()};
+		try {
+			flag=runner.update(DBUtils.getConnection(),sql,params);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return flag;
+	}
+	//新成员审核不通过
+	
+	@Override
+	public int deleteNewMember(String username) {
+		int flag=0;
+		String sql="delete from newMemberApplication where username=?";
+		try {
+			flag=runner.update(DBUtils.getConnection(),sql,username);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return flag;
+	}
+	
+	//查看所有新成员以便管理
+	
+	@Override
+	public List<NewMember> queryNewMember() {
+		List<NewMember> list=new ArrayList<>();
+		String sql="select * from newMemberApplication ";
+		try {
+			list=runner.query(DBUtils.getConnection(),sql, new BeanListHandler<NewMember>(NewMember.class));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
 	}
 	
 	@Override
@@ -68,18 +114,7 @@ public class UserDaoImpl implements UserDao{
 	增加
 	 */
 	
-	@Override
-	public int newMember(NewMember newMember) {
-		int flag=0;
-		String sql="insert into newMemberApplication (username,gender,nation,grade,age,major,myQQ,email,phoneNum,picture,aim,selfInstruction,opinion) values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
-		Object[] params={newMember.getUsername(),newMember.getGender(),newMember.getNation(),newMember.getGrade(),newMember.getAge(),newMember.getMajor(),newMember.getMyQQ(),newMember.getEmail(),newMember.getPhoneNum(),newMember.getPicture(),newMember.getAim(),newMember.getSelfInstruction(),newMember.getOpinion()};
-		try {
-			flag=runner.update(DBUtils.getConnection(),sql,params);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return flag;
-	}
+	
 	
 	@Override
 	public int add(User user) throws SQLException {

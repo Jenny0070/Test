@@ -11,13 +11,43 @@ import java.util.List;
 
 public class UserService {
 	
-	//报名注册
+	/**
+	 * 新用户
+	 * @param newMember
+	 * @return
+	 */
+	//新用户注册
+	
 	public int newMember(NewMember newMember){
 		UserDao userDao=new UserDaoImpl();
-		int flag=0;
+		int flag;
 		flag=userDao.newMember(newMember);
 		return flag;
 	}
+	
+	//新用户删除
+	
+	public int deleteNewMember(String username){
+		int flag;
+		UserDao userDao=new UserDaoImpl();
+		flag=userDao.deleteNewMember(username);
+		return flag;
+	}
+	
+	//新用户查看
+	
+	public List<NewMember> queryNewMember(){
+		List<NewMember> list=new ArrayList<>();
+		UserDao userDao=new UserDaoImpl();
+		list=userDao.queryNewMember();
+		return list;
+	}
+	
+	/**
+	 * 普通用户
+	 * @param user
+	 * @return
+	 */
 	//注册
 	
 	public int addUser(User user){
