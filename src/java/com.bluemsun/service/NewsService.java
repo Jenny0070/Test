@@ -12,12 +12,13 @@ import java.util.List;
 public class NewsService<T> {
 	//分页
 	
-	public Page<T> getPageService(int pageNum,int pageSize){
+	public Page getPageService(int pageNum,int pageSize){
 		NewsDao newsDao=new NewsDaoImpl();
+		//totalRecord
 		Long count=newsDao.getCount();
 		Page page=new Page(pageNum,pageSize,count);
 		List list=newsDao.getNewsDao(pageNum,pageSize);
-		page.setList(list);
+		page.setPageList(list);
 		return page;
 	}
 	

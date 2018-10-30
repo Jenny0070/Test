@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class NewsDaoImpl implements NewsDao {
+	
 	//分页功能
 	
 	private QueryRunner runner=new QueryRunner();
@@ -30,7 +31,7 @@ public class NewsDaoImpl implements NewsDao {
 	//查找有几条记录
 	@Override
 	public Long getCount() {
-		String sql = "select count(*) from news";
+		String sql = "select count(id) from news";
 		Long count=0L;
 		try {
 			//ScalarHandler()方法只能返回long类型的数据
@@ -49,7 +50,7 @@ public class NewsDaoImpl implements NewsDao {
 	public int add(News news) throws SQLException {
 		int line;
 		Connection conn=DBUtils.getConnection();
-		String sql="INSERT INTO user (title,keyWord,promulgator,content,type,data) VALUES(?,?,?,?,?,?)";
+		String sql="INSERT INTO news (title,keyWord,promulgator,content,type,data) VALUES(?,?,?,?,?,?)";
 		Object[] param={news.getTitle(),news.getKeyWord(),news.getPromulgator(),news.getContent(),news.getType(),news.getDate()};
 		line=runner.update(conn,sql,param);
 		DBUtils.closeConnection(null,null,conn);
@@ -86,7 +87,7 @@ public class NewsDaoImpl implements NewsDao {
 	@Override
 	public int update(News news) throws SQLException {
 		int flag=0;
-		String sql="UPDATE blog set title=?,keyWord=?,promulgator=?content=?,type=?,data=? WHERE id=?";
+		String sql="UPDATE news set title=?,keyWord=?,promulgator=?content=?,type=?,data=? WHERE id=?";
 		//参数最好按照？顺序
 		Object[] params={news.getTitle(),news.getKeyWord(),news.getPromulgator(),news.getContent(),news.getContent(),news.getType(),news.getDate(),news.getId()};
 		flag=runner.update(DBUtils.getConnection(),sql,params);

@@ -190,20 +190,9 @@ public class MainServlet extends HttpServlet {
 	
 	//分页
 	private void pagination(HttpServletRequest req, HttpServletResponse resp) {
-		int pageNum=Integer.parseInt(req.getParameter("pageNum"));
+		int pageNum= Integer.parseInt(req.getParameter("pageNum"));
 		int pageSize=5;
-		NewsService ts=new NewsService();
-		Page page=ts.getPageService(pageNum,pageSize);
-		req.setAttribute("page",page);
-		JSONObject jsonObject=new JSONObject();
-		resp.setContentType("application/json;charset=utf-8");
-		resp.setContentType("text/json;charset=utf-8");
-		try {
-			resp.getWriter().write(String.valueOf(jsonObject));
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		
 	}
 	
 	//修改————后台已实现，前台无传参，无法实现

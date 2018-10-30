@@ -74,6 +74,8 @@ public class Page<T>{
 				this.end=totalPage;
 			}
 		}
+		
+		
 	}
 	
 	public int getTotalPage() {

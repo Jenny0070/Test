@@ -10,6 +10,18 @@ public class News {
 	private String type;
 	private String date;
 	
+	public  News(){
+	
+	}
+	public News(String title, String keyWord, String promulgator, String content, String type, String date) {
+		this.title = title;
+		this.keyWord = keyWord;
+		this.promulgator = promulgator;
+		this.content = content;
+		this.type = type;
+		this.date = date;
+	}
+	
 	public int getId() {
 		return id;
 	}

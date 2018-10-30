@@ -1,6 +1,7 @@
 package com.bluemsun.controller;
 
 import com.bluemsun.entity.News;
+import com.bluemsun.entity.Page;
 import com.bluemsun.service.NewsService;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -28,8 +29,10 @@ public class NewsServlet extends HttpServlet {
 		
 		String state = req.getParameter("state");
 		switch (state){
+			case "pagination":
+				pagination(req,resp);
 			case "addNews":
-				addNewsServlet(req,resp);
+				addNews(req,resp);
 				break;
 			case "deleteNews":
 				deleteNewsServlet(req,resp);
@@ -42,9 +45,28 @@ public class NewsServlet extends HttpServlet {
 				break;
 		}
 	}
+	//新闻分页
+	
+	private void pagination(HttpServletRequest req, HttpServletResponse resp) {
+		int pageNum= Integer.parseInt(req.getParameter("pageNum"));
+		int pageSize=5;
+		NewsService newsService=new NewsService();
+		Page page=newsService.getPageService(pageNum,pageSize);
+		List<News> list=new ArrayList<>();
+		list=page.getPageList();
+		
+		resp.setContentType("application/json;charset=utf-8");
+		resp.setContentType("text/json;charset=utf-8");
+		JSONArray jsonArray=JSONArray.fromObject(list);
+		try {
+			resp.getWriter().write(String.valueOf(jsonArray));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	//增加
 	
-	private void addNewsServlet(HttpServletRequest req, HttpServletResponse resp) {
+	private void addNews(HttpServletRequest req, HttpServletResponse resp) {
 		News news=new News();
 		news.setTitle(req.getParameter("title"));
 		news.setDate(req.getParameter("data"));
