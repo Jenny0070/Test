@@ -1,7 +1,9 @@
 package com.bluemsun.controller;
 
+import com.bluemsun.entity.Inform;
 import com.bluemsun.entity.News;
 import com.bluemsun.entity.Page;
+import com.bluemsun.service.InformService;
 import com.bluemsun.service.NewsService;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -14,11 +16,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NewsServlet extends HttpServlet {
-
+public class InformServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		doPost(req,resp);
+		doPost(req, resp);
 	}
 	
 	@Override
@@ -31,27 +32,26 @@ public class NewsServlet extends HttpServlet {
 		switch (state){
 			case "pagination":
 				pagination(req,resp);
-			case "addNews":
-				addNews(req,resp);
+			case "addInform":
+				addInform(req,resp);
 				break;
-			case "deleteNews":
-				deleteNewsServlet(req,resp);
+			case "deleteInform":
+				deleteInform(req,resp);
 				break;
-			case "updateNews":
-				updateNewsServlet(req,resp);
+			case "updateInform":
+				updateInform(req,resp);
 				break;
-			case "queryNews":
-				queryNewsServlet(req,resp);
+			case "queryInform":
+				queryInform(req,resp);
 				break;
 		}
 	}
-	//新闻分页
 	
 	private void pagination(HttpServletRequest req, HttpServletResponse resp) {
 		int pageNum= Integer.parseInt(req.getParameter("pageNum"));
 		int pageSize=5;
-		NewsService newsService=new NewsService();
-		Page page=newsService.getPageService(pageNum,pageSize);
+		InformService informService=new InformService();
+		Page page=informService.getPageService(pageNum,pageSize);
 		List<News> list=new ArrayList<>();
 		list=page.getPageList();
 		
@@ -64,19 +64,19 @@ public class NewsServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
-	//增加
 	
-	private void addNews(HttpServletRequest req, HttpServletResponse resp) {
-		News news=new News();
-		news.setTitle(req.getParameter("title"));
-		news.setDate(req.getParameter("data"));
-		news.setPromulgator(req.getParameter("promulgator"));
-		news.setType(req.getParameter("type"));
-		news.setContent(req.getParameter("content"));
-		news.setKeyWord(req.getParameter("keyWord"));
+	private void addInform(HttpServletRequest req, HttpServletResponse resp) {
+		Inform inform=new Inform();
+		inform.setTitle(req.getParameter("title"));
+		inform.setDate(req.getParameter("date"));
+		inform.setContent(req.getParameter("content"));
+		inform.setHits(req.getParameter("hits"));
+		inform.setIssuer(req.getParameter("issuer"));
+		inform.setLimit(req.getParameter("limit"));
+		inform.setKeyWord(req.getParameter("keyWord"));
 		
-		NewsService newsService=new NewsService();
-		int flag=newsService.add(news);
+		InformService informService=new InformService();
+		int flag=informService.add(inform);
 		JSONObject jsonObject=new JSONObject();
 		resp.setContentType("application/json;charset=utf-8");
 		resp.setContentType("text/json;charset=utf-8");
@@ -97,13 +97,12 @@ public class NewsServlet extends HttpServlet {
 			}
 		}
 	}
-	//删除
 	
-	private void deleteNewsServlet(HttpServletRequest req, HttpServletResponse resp) {
-		NewsService newsService=new NewsService();
-		int id=newsService.findIdByTitle(req.getParameter("title"));
+	private void deleteInform(HttpServletRequest req, HttpServletResponse resp) {
+		InformService informService=new InformService();
+		int id=informService.findIdByTitle(req.getParameter("title"));
 		
-		int flag=newsService.delete(id);
+		int flag=informService.delete(id);
 		JSONObject jsonObject=new JSONObject();
 		resp.setContentType("application/json;charset=utf-8");
 		resp.setContentType("text/json;charset=utf-8");
@@ -123,22 +122,22 @@ public class NewsServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-		
 	}
 	
-	private void updateNewsServlet(HttpServletRequest req, HttpServletResponse resp) {
-		News news=new News();
-		news.setTitle(req.getParameter("title"));
-		news.setDate(req.getParameter("data"));
-		news.setPromulgator(req.getParameter("promulgator"));
-		news.setType(req.getParameter("type"));
-		news.setContent(req.getParameter("content"));
-		news.setKeyWord(req.getParameter("keyWord"));
+	private void updateInform(HttpServletRequest req, HttpServletResponse resp) {
+		Inform inform=new Inform();
+		inform.setTitle(req.getParameter("title"));
+		inform.setDate(req.getParameter("date"));
+		inform.setContent(req.getParameter("content"));
+		inform.setHits(req.getParameter("hits"));
+		inform.setIssuer(req.getParameter("issuer"));
+		inform.setLimit(req.getParameter("limit"));
+		inform.setKeyWord(req.getParameter("keyWord"));
 		
-		NewsService newsService=new NewsService();
-		news.setId(newsService.findIdByTitle(req.getParameter("title")));
+		InformService informService=new InformService();
+		inform.setId(informService.findIdByTitle(req.getParameter("title")));
 		
-		int flag=newsService.update(news);
+		int flag=informService.update(inform);
 		JSONObject jsonObject=new JSONObject();
 		resp.setContentType("application/json;charset=utf-8");
 		resp.setContentType("text/json;charset=utf-8");
@@ -160,12 +159,11 @@ public class NewsServlet extends HttpServlet {
 		}
 	}
 	
-	private void queryNewsServlet(HttpServletRequest req, HttpServletResponse resp) {
+	private void queryInform(HttpServletRequest req, HttpServletResponse resp) {
 		
-		
-		List<News> list=new ArrayList<>();
-		NewsService newsService=new NewsService();
-		list=newsService.queryAll();
+		List<Inform> list=new ArrayList<>();
+		InformService informService=new InformService();
+		list=informService.queryAll();
 		JSONArray jsonArray=JSONArray.fromObject(list);
 		//json传数据的关键语句3
 		resp.setContentType("application/json;charset=utf-8");
@@ -179,3 +177,4 @@ public class NewsServlet extends HttpServlet {
 	}
 	
 }
+

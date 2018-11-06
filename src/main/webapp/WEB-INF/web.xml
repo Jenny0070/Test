@@ -16,6 +16,15 @@
     <!--“/*”表示拦截所有的请求 -->
     <url-pattern>/success.jsp</url-pattern>
   </filter-mapping>
+  <!--过滤通知公告只有部分人可见-->
+  <!--<filter>-->
+    <!--<filter-name>newsFilter</filter-name>-->
+    <!--<filter-class>com.bluemsun.controller.testFilter</filter-class>-->
+  <!--</filter>-->
+  <!--<filter-mapping>-->
+    <!--<filter-name>newsFilter</filter-name>-->
+    <!--<url-pattern>/news.html</url-pattern>-->
+  <!--</filter-mapping>-->
   <servlet>
     <servlet-name>SearchServlet</servlet-name>
     <servlet-class>com.bluemsun.controller.SearchServlet</servlet-class>
