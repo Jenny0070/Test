@@ -135,6 +135,7 @@ public class UserDaoImpl implements UserDao{
 	public int add(User user) throws SQLException {
 		int line;
 		Connection conn=DBUtils.getConnection();
+		System.out.println(conn);
 		String sql="INSERT INTO user (username,password,email,gender,identity,phoneNum) VALUES(?,?,?,?,?,?)";
 		Object[] param={user.getUsername(),user.getPassword(),user.getEmail(),user.getGender(),user.getIdentity(),user.getPhoneNum()};
 		line=runner.update(conn,sql,param);

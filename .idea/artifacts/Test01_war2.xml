@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="war" build-on-make="true" name="Test01:war2">
+    <output-path>$PROJECT_DIR$/out/artifacts/Test01_war2</output-path>
+    <root id="archive" name="Test01_war.war">
+      <element id="artifact" artifact-name="Test01:war exploded" />
+      <element id="directory" name="META-INF" />
+    </root>
+  </artifact>
+</component>

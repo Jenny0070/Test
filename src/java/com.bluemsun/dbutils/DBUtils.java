@@ -6,10 +6,10 @@ import java.util.ResourceBundle;
 
 
 public class DBUtils {
-	private static String URL="jdbc:mysql://localhost:3306/10_10bluenet";
+	private static String URL="jdbc:mysql://localhost:3306/10_10bluenet?useSSL=true&serverTimezone=GMT";
 	private static String USERNAME="root";
-	private static String PASSWORD="root";
-	private static String DRIVER="com.mysql.jdbc.Driver";
+	private static String PASSWORD="123456";
+	private static String DRIVER="com.mysql.cj.jdbc.Driver";
 	
 	public DBUtils() {
 	}
@@ -27,11 +27,12 @@ public class DBUtils {
 	
 	public static Connection getConnection () {
 		Connection conn=null;
+		System.out.println(PASSWORD);
 		try {
 			conn= DriverManager.getConnection(URL,USERNAME,PASSWORD);
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("获取连接失败");
+			System.out.println(PASSWORD+"获取连接失败");
 		}
 		return conn;
 		
