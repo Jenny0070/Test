@@ -1,6 +1,5 @@
 package com.bluemsun.controller;
 
-import com.bluemsun.dao.BlogDao.BlogDao;
 import com.bluemsun.entity.Blog;
 import com.bluemsun.service.BlogService;
 import net.sf.json.JSONArray;
@@ -14,6 +13,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Sunny
+ */
 public class BlogServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

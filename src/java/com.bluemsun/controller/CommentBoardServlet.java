@@ -13,6 +13,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Sunny
+ */
 public class CommentBoardServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -47,7 +50,7 @@ public class CommentBoardServlet extends HttpServlet {
 		commentBoard.setContent(req.getParameter("content"));
 		commentBoard.setKeyWord(req.getParameter("keyWord"));
 		commentBoard.setTarget(req.getParameter("target"));
-		commentBoard.setUsername(req.getParameter("username"));
+		commentBoard.setUsername(req.getParameter(""));
 		
 		CommentBoardService commentBoardService=new CommentBoardService();
 		int id=commentBoardService.findId(commentBoard);

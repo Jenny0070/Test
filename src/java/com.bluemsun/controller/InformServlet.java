@@ -4,7 +4,6 @@ import com.bluemsun.entity.Inform;
 import com.bluemsun.entity.News;
 import com.bluemsun.entity.Page;
 import com.bluemsun.service.InformService;
-import com.bluemsun.service.NewsService;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
@@ -16,6 +15,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Sunny
+ */
 public class InformServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -106,8 +108,9 @@ public class InformServlet extends HttpServlet {
 		JSONObject jsonObject=new JSONObject();
 		resp.setContentType("application/json;charset=utf-8");
 		resp.setContentType("text/json;charset=utf-8");
+		
 		if (flag>0){
-			jsonObject.put("flag","删除成功");
+			jsonObject.put("flag","true");
 			try {
 				resp.getWriter().write(String.valueOf(jsonObject));
 			} catch (IOException e) {
@@ -115,7 +118,7 @@ public class InformServlet extends HttpServlet {
 			}
 		}
 		else{
-			jsonObject.put("flag","删除失败");
+			jsonObject.put("flag","false");
 			try {
 				resp.getWriter().write(String.valueOf(jsonObject));
 			} catch (IOException e) {
@@ -160,6 +163,8 @@ public class InformServlet extends HttpServlet {
 	}
 	
 	private void queryInform(HttpServletRequest req, HttpServletResponse resp) {
+		
+		
 		
 		List<Inform> list=new ArrayList<>();
 		InformService informService=new InformService();

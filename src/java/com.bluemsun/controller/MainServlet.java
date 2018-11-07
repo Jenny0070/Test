@@ -1,14 +1,9 @@
 package com.bluemsun.controller;
 
-import com.bluemsun.dao.NewsDao.NewsDao;
-import com.bluemsun.dao.UserDao.UserDao;
-import com.bluemsun.dao.UserDao.UserDaoImpl;
+
 import com.bluemsun.entity.NewMember;
-import com.bluemsun.entity.Page;
 import com.bluemsun.entity.User;
-import com.bluemsun.service.NewsService;
 import com.bluemsun.service.UserService;
-import javafx.scene.control.Pagination;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
@@ -17,10 +12,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Sunny
+ */
 public class MainServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -30,6 +27,7 @@ public class MainServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		//如若没有下面这句话，则需要自己在js中进行解析
+		
 		//resp.setContentType("application/json;charset=ust-8");
 		
 		req.setCharacterEncoding("utf-8");
@@ -330,23 +328,28 @@ public class MainServlet extends HttpServlet {
 		
 		if(list!=null && !list.isEmpty()){
 			
+			JSONObject jsonObject=new JSONObject();
+			jsonObject.put("flag","true");
+			resp.setContentType("application/json;charset=utf-8");
+			resp.setContentType("text/json;charset=utf-8");
 			try {
-				req.getRequestDispatcher("/success.jsp").forward(req,resp);
-			} catch (ServletException e) {
-				e.printStackTrace();
+				resp.getWriter().write(String.valueOf(jsonObject));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
 		else {
+			JSONObject jsonObject=new JSONObject();
+			jsonObject.put("flag","false");
+			resp.setContentType("application/json;charset=utf-8");
+			resp.setContentType("text/json;charset=utf-8");
 			try {
-				req.getRequestDispatcher("/fail.jsp").forward(req,resp);
-			} catch (ServletException e) {
-				e.printStackTrace();
+				resp.getWriter().write(String.valueOf(jsonObject));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
+		
 		
 	
 	}

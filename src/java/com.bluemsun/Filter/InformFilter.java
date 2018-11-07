@@ -1,44 +1,26 @@
-package com.bluemsun.controller;
+package com.bluemsun.Filter;
 
-import javax.servlet.Filter;
-import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
+
+import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-
-/**
- * @author Sunny
- */
-public class testFilter implements Filter {
-	
-	
+public class InformFilter implements Filter {
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
-		System.out.println("----过滤器初始化----");
+		System.out.println("部分通知可见的过滤");
+		
 	}
 	
-	/**
-	 * 只有直接访问对应页面时才可出现“没有访问权限”，从别的路径进入，过滤器不起作用？？？？？？
-	 * @param servletRequest
-	 * @param servletResponse
-	 * @param filterChain
-	 * @throws IOException
-	 * @throws ServletException
-	 */
 	@Override
 	public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-		//对request和response进行一些预处理
 		servletRequest.setCharacterEncoding("UTF-8");
 		servletResponse.setCharacterEncoding("UTF-8");
 		servletResponse.setContentType("text/html;charset=UTF-8");
-		
-		System.out.println("FilterDemo01执行前！！！");
+
+		System.out.println("InformFilter执行前！！！");
 		//获取session对象
 		HttpServletRequest request = (HttpServletRequest) servletRequest;
 		HttpServletResponse response=(HttpServletResponse)servletResponse;
@@ -51,14 +33,12 @@ public class testFilter implements Filter {
 			response.sendRedirect("loginPage.jsp");
 		} else {
 			filterChain.doFilter(request, response);
-		}
 		System.out.println("FilterDemo01执行后！！！");
-		
+
 	}
 	
 	@Override
 	public void destroy() {
-		System.out.println("----过滤器销毁----");
-		
+	
 	}
 }
